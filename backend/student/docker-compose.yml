@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+
+  student:
+    image: rithikam/student:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - ptu-network
+    environment:
+      - jwt.secret-key=almightyjava
+  faculty:
+    image: rithikam/faculty:latest
+    ports:
+      - "8082:8082"
+    networks:
+      - ptu-network
+    environment:
+      - jwt.secret-key=almightyjava
+  admin:
+    image: rithikam/admin:latest
+    ports:
+      - "8083:8083"
+    networks:
+      - ptu-network
+    environment:
+      - jwt.secret-key=almightyjava
+
+  codequestion:
+    image: rithikam/codequestion:latest
+    ports:
+      - "8090:8090"
+    networks:
+      - ptu-network
+          
+networks:
+  ptu-network:
