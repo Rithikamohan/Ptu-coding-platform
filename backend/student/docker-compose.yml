@@ -1,0 +1,56 @@
+version: '3.1'
+services:
+  student:
+    container_name: student_container
+    image: student_microservice
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - pg
+    networks:
+      - mynetwork
+  faculty:
+    container_name: faculty_container
+    image: rithikam/faculty_ms
+    ports:
+      - "8082:8082"
+    depends_on:
+      - pg
+    networks:
+      - mynetwork
+          
+  codeproblem:
+    container_name: codeproblem_container
+    image: codeproblem_ms
+    ports:
+      - "8084:8084"
+    depends_on:
+      - pg
+    networks:
+      - mynetwork 
+    
+  admin:
+    container_name: admin_container
+    image: admin_microservice
+    ports:
+      - "8083:8083"
+    depends_on:
+      - pg
+    networks:
+      - mynetwork   
+  pg:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=0000
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=studentdb 
+    networks:
+      - mynetwork  
+      
+networks:
+  mynetwork:
+    
+      
